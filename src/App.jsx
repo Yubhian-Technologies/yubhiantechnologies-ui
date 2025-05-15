@@ -9,6 +9,7 @@ import About from './sections/About'
 import Careers from './pages/Careers'
 import Contact from './sections/Contact'
 import MainPage from './pages/MainPage'
+import Testimonial from './sections/Testimonial'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
+          <Route path="/testimonials" element={<Testimonial />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<Careers />} />
         </Routes>
