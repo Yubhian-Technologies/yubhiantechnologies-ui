@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className='pt-10'>
+      <main>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/services" element={<Services />} />
