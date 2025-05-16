@@ -66,7 +66,7 @@ const Footer = () => {
 
         {/* Navigation Links */}
         <nav className="mb-10">
-          <ul className="flex flex-col sm:flex-row justify-center items-center sm:space-x-12 space-y-4 sm:space-y-0 text-lg font-semibold tracking-wide">
+          <ul className="hidden sm:flex justify-center items-center space-x-12 text-lg font-semibold tracking-wide">
             {quickLinks.map(({ to, label }) => (
               <li key={to}>
                 <Link
