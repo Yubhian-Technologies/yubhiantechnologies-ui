@@ -51,7 +51,7 @@ export default function ContactFooter() {
       {/* Contact Section */}
       <section className="max-w-5xl mx-auto px-6 py-20 text-center">
         <h2
-          className="text-[7rem] font-extrabold tracking-[0.12em] mb-8 whitespace-nowrap"
+          className="text-4xl sm:text-[5rem] md:text-[6rem] lg:text-[7rem] font-extrabold tracking-[0.12em] mb-8 whitespace-nowrap"
           aria-label={text}
           style={{ lineHeight: 1 }}
         >
@@ -60,10 +60,10 @@ export default function ContactFooter() {
           ))}
         </h2>
 
-        <div className="flex justify-center flex-col sm:flex-row gap-6 sm:gap-12 text-lg font-semibold">
+        <div className="flex justify-center flex-col sm:flex-row gap-4 sm:gap-12 text-lg font-semibold break-words">
           <a
             href={`mailto:${contactEmails}`}
-            className="hover:text-blue-500 transition-colors duration-300 break-words"
+            className="hover:text-blue-500 transition-colors duration-300"
             aria-label="Send email"
           >
             {contactEmails}
@@ -78,31 +78,16 @@ export default function ContactFooter() {
         </div>
       </section>
 
-      {/* Images horizontal scroll */}
-      <section className="max-w-full mx-auto overflow-hidden px-0 pb-20">
-        <div
-          className="flex animate-scroll-left cursor-grab"
-          style={{ width: `${images.length * 500 * 2}px` }}
-        >
-          {images.map((img, idx) => (
+      {/* Auto-scrolling Images */}
+      <section className="relative w-full overflow-hidden pb-20">
+        <div className="flex w-max animate-scroll-left gap-4 px-4">
+          {[...images, ...images].map((img, idx) => (
             <img
               key={idx}
               src={img}
               alt={`Team working ${idx + 1}`}
-              className="h-[300px] w-[500px] object-cover rounded-none shadow-none"
+              className="h-[200px] sm:h-[300px] w-[85vw] sm:w-[500px] object-cover rounded-md shadow-md shrink-0"
               draggable={false}
-              style={{ marginRight: 0 }}
-            />
-          ))}
-          {/* Repeat images for continuous scroll */}
-          {images.map((img, idx) => (
-            <img
-              key={idx + images.length}
-              src={img}
-              alt={`Team working repeat ${idx + 1}`}
-              className="h-[300px] w-[500px] object-cover rounded-none shadow-none"
-              draggable={false}
-              style={{ marginRight: 0 }}
             />
           ))}
         </div>
@@ -156,22 +141,21 @@ export default function ContactFooter() {
       </footer>
       */}
 
-      
       <style jsx>{`
         @keyframes scroll-left {
           0% {
-            transform: translateX(0);
+            transform: translateX(0%);
           }
           100% {
             transform: translateX(-50%);
           }
         }
+
         .animate-scroll-left {
           animation: scroll-left 60s linear infinite;
         }
       `}</style>
 
-      
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
