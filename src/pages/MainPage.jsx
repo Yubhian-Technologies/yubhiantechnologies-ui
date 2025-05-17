@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from '../sections/Home';
 import Services from '../sections/Services';
+import WorkProcessSection from '../sections/WorkProcessSection';
 import About from '../sections/About';
 import Contact from '../sections/Contact';
 import Testimonial from '../sections/Testimonial';
@@ -13,6 +14,7 @@ function MainPage() {
             <About />
             <Testimonial />
             <Services />
+            <WorkProcessSection/>
             <Contact />
         </div>
     );
