@@ -8,7 +8,7 @@ interface ProcessStepProps {
   };
   position: string;
   active: boolean;
-  onClick: () => void;
+  // onClick: () => void;
 }
 
 const ProcessStep: React.FC<ProcessStepProps> = ({ step, active }) => {

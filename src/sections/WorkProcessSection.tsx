@@ -61,6 +61,8 @@ const workProcessSteps = [
   },
 ];
 
+const ANIMATION_DELAY = 2000; // ms delay between steps, adjust for speed
+
 const WorkProcessSection = () => {
   const [activeStep, setActiveStep] = useState('01');
   const [hoveredStep, setHoveredStep] = useState<string | null>(null);
@@ -74,34 +76,16 @@ const WorkProcessSection = () => {
     (step) => step.id === hoveredStep || step.id === activeStep
   )!;
 
+  // Intersection Observer to toggle animation on section visibility
   useEffect(() => {
-    let isMounted = true;
-
-    const runAnimation = () => {
-      if (!isAnimatingRef.current || isPaused || !isMounted) return;
-
-      const currentIndex = workProcessSteps.findIndex((step) => step.id === activeStep);
-      const nextIndex = (currentIndex + 1) % workProcessSteps.length;
-      const nextStep = workProcessSteps[nextIndex].id;
-
-      animationRef.current = window.setTimeout(() => {
-        if (isMounted) {
-          setActiveStep(nextStep);
-          setProgress((nextIndex + 1) * (100 / workProcessSteps.length));
-          runAnimation();
-        }
-      }, 2000);
-    };
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           isAnimatingRef.current = entry.isIntersecting;
-          if (entry.isIntersecting && !isPaused) {
-            runAnimation();
-          } else if (animationRef.current) {
+          if (!entry.isIntersecting && animationRef.current) {
             window.clearTimeout(animationRef.current);
           }
+          // When it comes back into view, animation restarts via activeStep effect below
         });
       },
       { threshold: 0.3 }
@@ -112,25 +96,46 @@ const WorkProcessSection = () => {
     }
 
     return () => {
-      isMounted = false;
       observer.disconnect();
       if (animationRef.current) {
         window.clearTimeout(animationRef.current);
       }
     };
-  }, [activeStep, isPaused]);
+  }, []);
 
+  // Update progress on activeStep change
   useEffect(() => {
-    if (hoveredStep) {
+    const currentIndex = workProcessSteps.findIndex((step) => step.id === activeStep);
+    setProgress(((currentIndex + 1) * 100) / workProcessSteps.length);
+  }, [activeStep]);
+
+  // Animation runner function
+  const runAnimation = () => {
+    if (!isAnimatingRef.current || isPaused) return;
+
+    if (animationRef.current) {
+      window.clearTimeout(animationRef.current);
+    }
+
+    const currentIndex = workProcessSteps.findIndex((step) => step.id === activeStep);
+    const nextIndex = (currentIndex + 1) % workProcessSteps.length;
+    const nextStep = workProcessSteps[nextIndex].id;
+
+    animationRef.current = window.setTimeout(() => {
+      setActiveStep(nextStep);
+    }, ANIMATION_DELAY);
+  };
+
+  // Trigger animation on activeStep or pause changes
+  useEffect(() => {
+    if (!hoveredStep && !isPaused && isAnimatingRef.current) {
+      runAnimation();
+    } else {
       if (animationRef.current) {
         window.clearTimeout(animationRef.current);
       }
-    } else if (!isPaused) {
-      isAnimatingRef.current = true;
-      const currentIndex = workProcessSteps.findIndex((step) => step.id === activeStep);
-      setProgress((currentIndex + 1) * (100 / workProcessSteps.length));
     }
-  }, [hoveredStep, isPaused]);
+  }, [activeStep, isPaused, hoveredStep]);
 
   const displayStep = hoveredStep || activeStep;
 
@@ -203,24 +208,24 @@ const WorkProcessSection = () => {
                 const y = Math.sin(angle) * radius;
 
                 return (
-                  <div
+                  <button
                     key={step.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full"
                     style={{
                       left: `calc(50% + ${x}px)`,
                       top: `calc(50% + ${y}px)`,
                     }}
                     onMouseEnter={() => setHoveredStep(step.id)}
                     onMouseLeave={() => setHoveredStep(null)}
-                    aria-label={`Step ${step.id}: ${step.title}`}
+                    onClick={() => setActiveStep(step.id)}
+                    aria-label={`Step ${step.id}: ${step.title}. ${step.description}`}
                   >
                     <ProcessStep
                       step={step}
                       position=""
                       active={displayStep === step.id}
-                      onClick={() => {}}
                     />
-                  </div>
+                  </button>
                 );
               })}
             </div>
