@@ -1,54 +1,92 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const quickLinks = [
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
+    { to: "/services", label: "Services" },
+    { to: "/careers", label: "Careers" },
+    { to: "/contact", label: "Contact" },
+  ];
+
+  const socialLinks = {
+    instagram: "https://instagram.com/yubhiantechnologies",
+    twitter: "https://twitter.com/yubhiantech",
+    facebook: "https://facebook.com/yubhiantechnologies",
+    whatsapp: "https://wa.me/918500401091",
+  };
+
+  const socialIcons = [
+    {
+      href: socialLinks.facebook,
+      label: "Facebook",
+      iconClass: "fab fa-facebook-f",
+      hoverColor: "hover:bg-blue-600",
+    },
+    {
+      href: socialLinks.twitter,
+      label: "Twitter",
+      iconClass: "fab fa-twitter",
+      hoverColor: "hover:bg-sky-400",
+    },
+    {
+      href: socialLinks.instagram,
+      label: "Instagram",
+      iconClass: "fab fa-instagram",
+      hoverColor: "hover:bg-pink-500",
+    },
+    {
+      href: socialLinks.whatsapp,
+      label: "WhatsApp",
+      iconClass: "fab fa-whatsapp",
+      hoverColor: "hover:bg-green-500",
+    },
+  ];
+
   return (
-    <footer className="bg-gray-900 text-white py-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">Yubhian Technologies</h3>
-            <p className="text-gray-400">Innovative IT solutions for your business needs.</p>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li><Link to="/" className="text-gray-400 hover:text-white">Home</Link></li>
-              <li><Link to="/about" className="text-gray-400 hover:text-white">About</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white">Services</Link></li>
-              <li><Link to="/careers" className="text-gray-400 hover:text-white">Careers</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white">Contact</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-            <address className="text-gray-400 not-italic">
-              <p>Bhimavaram, Andhra Pradesh</p>
-              <p>Phone: +91 8500401091</p>
-              <p>Email: info@yubhiantechnologies.in</p>
-            </address>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white">
-                <i className="fab fa-facebook"></i>
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white">
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white">
-                <i className="fab fa-linkedin"></i>
-              </a>
-            </div>
-          </div>
+    <footer className="bg-gray-900 text-gray-300 py-10">
+      <div className="container mx-auto px-6 max-w-5xl">
+        
+        {/* Social Icons */}
+        <div className="flex flex-wrap justify-center gap-6 mb-10">
+          {socialIcons.map(({ href, label, iconClass, hoverColor }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className={`text-gray-400 w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition transform duration-300 ease-in-out ${hoverColor} hover:text-white hover:scale-110`}
+            >
+              <i className={`${iconClass} text-2xl`}></i>
+            </a>
+          ))}
         </div>
-        <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Yubhian Technologies. All rights reserved.</p>
+
+        {/* Navigation Links */}
+        <nav className="mb-10">
+          <ul className="hidden sm:flex justify-center items-center space-x-12 text-lg font-semibold tracking-wide">
+            {quickLinks.map(({ to, label }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className="hover:text-white transition-colors duration-300"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Footer Text */}
+        <div className="text-center text-gray-500 text-sm select-none">
+          &copy; {new Date().getFullYear()} Yubhian Technologies. All rights reserved.
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
