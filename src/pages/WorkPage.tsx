@@ -1,4 +1,3 @@
-import React from 'react';
 import WorkProcessSection from '../sections/WorkProcessSection';
 
 const WorkPage = () => {
