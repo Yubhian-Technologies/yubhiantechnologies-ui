@@ -5,6 +5,7 @@ import WorkProcessSection from '../sections/WorkProcessSection';
 import About from '../sections/About';
 import Contact from '../sections/Contact';
 import Testimonial from '../sections/Testimonial';
+import Achievements from "../sections/Achievements";
 
 function MainPage() {
     return (
@@ -14,6 +15,7 @@ function MainPage() {
             <About />
             <Testimonial />
             <Services />
+            <Achievements />
             <WorkProcessSection/>
             <Contact />
         </div>
