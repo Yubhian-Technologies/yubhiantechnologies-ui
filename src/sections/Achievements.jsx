@@ -90,7 +90,8 @@ const AchievementCard = ({ icon: Icon, count, label }) => {
         <div
           className="absolute inset-0 rounded-xl"
           style={{
-            backgroundImage: `linear-gradient(to bottom, ${gradientColors[gradientIndex]})`,
+            backgroundImage: `bg-gradient-to-r from-blue-600 to-purple-600 
+                         hover:from-blue-700 hover:to-purple-700`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 0.1,
@@ -124,7 +125,7 @@ const AchievementsSection = () => {
       ref={sectionRef}
       className="py-16 md:py-24 transition-all duration-500 bg-cover bg-center bg-gradient-to-b from-[#3b82f6] to-[#8b5cf6]"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(59,130,246,0.9), rgba(139,92,246,0.9)), url(${background})`,
+        backgroundImage: `linear-gradient(90deg, rgba(0, 13, 255, 1) 0%, rgba(193, 21, 236, 1) 100%);`,
         backgroundBlendMode: "overlay",
       }}
     >
