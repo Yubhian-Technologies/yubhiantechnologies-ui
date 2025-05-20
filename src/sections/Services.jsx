@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const initialServices = [
   {
@@ -40,39 +40,9 @@ const initialServices = [
 ];
 
 const Services = () => {
-  const [toggleStyle, setToggleStyle] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setToggleStyle((prev) => !prev);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <style>{`
-        /* Outlined heading base style */
-        .outlined-heading {
-          font-weight: 900;
-          font-size: 2.5rem;
-          /* Removed uppercase transform so casing stays as typed */
-          transition: all 0.5s ease-in-out;
-          -webkit-font-smoothing: antialiased;
-        }
-        /* Outlined style: thick black stroke, transparent fill */
-        .outlined-heading.outlined {
-          color: transparent;
-          -webkit-text-stroke: 3px black;
-          text-stroke: 3px black;
-        }
-        /* Filled style: solid black text, no stroke */
-        .outlined-heading.filled {
-          color: black;
-          -webkit-text-stroke: 0;
-          text-stroke: 0;
-        }
-
         /* Sparkle animation */
         @keyframes sparkle-flicker {
           0%, 100% { opacity: 0; transform: scale(1); }
@@ -104,12 +74,8 @@ const Services = () => {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <section className="py-8">
-          {/* Animated Outlined Heading */}
-          <h1
-            className={`outlined-heading text-center mb-4 ${
-              toggleStyle ? "filled" : "outlined"
-            }`}
-          >
+          {/* Simple Heading without effects */}
+          <h1 className="text-4xl font-extrabold text-center mb-4 text-black">
             Our Services
           </h1>
 
