@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import testimonials from "../assets/testimonials.json";
-import BlinkingCircles from "../components/BlinkingCircles";
 
 const BLINK_INTERVAL = 500; // ms
 const SLIDE_INTERVAL = 2000; // ms
@@ -37,7 +36,6 @@ const Testimonial = () => {
     <section className="testimonial-section flex flex-col md:flex-row items-center justify-between py-16 px-8 bg-gradient-to-br from-blue-50 to-white">
       {/* Left Side */}
       <div className="left md:w-1/2 w-full mb-10 md:mb-0">
-        <BlinkingCircles heading="TESTIMONIALS" blink={blink} circleCount={3} />
         <h2 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
           We Want The Best <br /> Work For Us!
         </h2>

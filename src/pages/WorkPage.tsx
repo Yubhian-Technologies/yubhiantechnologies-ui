@@ -1,4 +1,5 @@
-import WorkProcessSection from '../sections/WorkProcessSection';
+import React from 'react';
+import WorkProcessSection from '../sections/ProcessTimeline';
 
 const WorkPage = () => {
   return (
